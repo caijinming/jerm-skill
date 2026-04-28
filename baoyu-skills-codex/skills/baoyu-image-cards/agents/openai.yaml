@@ -1,0 +1,7 @@
+interface:
+  display_name: "Image Cards"
+  short_description: "Turn content into a small social card series"
+  default_prompt: "Use $baoyu-image-cards to turn an article or markdown file into a Xiaohongshu-style card series."
+
+policy:
+  allow_implicit_invocation: true

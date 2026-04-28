@@ -1,0 +1,7 @@
+interface:
+  display_name: "Slide Deck"
+  short_description: "Turn content into a small shareable slide deck"
+  default_prompt: "Use $baoyu-slide-deck to turn an article or markdown file into a compact visual slide deck."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,7 @@
+interface:
+  display_name: "URL To Markdown"
+  short_description: "Save rendered web pages as markdown locally"
+  default_prompt: "Use $baoyu-url-to-markdown to fetch a webpage and save it as markdown."
+
+policy:
+  allow_implicit_invocation: true

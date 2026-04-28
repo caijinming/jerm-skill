@@ -1,0 +1,7 @@
+interface:
+  display_name: "Translator"
+  short_description: "Translate documents with chunk-aware workflow"
+  default_prompt: "Use $baoyu-translate to translate a markdown document with a clean, Codex-friendly workflow."
+
+policy:
+  allow_implicit_invocation: true

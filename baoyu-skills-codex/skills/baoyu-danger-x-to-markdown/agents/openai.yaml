@@ -1,0 +1,7 @@
+interface:
+  display_name: "X To Markdown"
+  short_description: "Save X posts, threads, and articles as local markdown"
+  default_prompt: "Use $baoyu-danger-x-to-markdown to fetch an X post or thread into markdown."
+
+policy:
+  allow_implicit_invocation: true

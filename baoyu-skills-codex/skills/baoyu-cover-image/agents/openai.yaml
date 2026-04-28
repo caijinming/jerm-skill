@@ -1,0 +1,7 @@
+interface:
+  display_name: "Cover Image"
+  short_description: "Turn article content into a cover image"
+  default_prompt: "Use $baoyu-cover-image to turn an article or markdown file into a polished cover image."
+
+policy:
+  allow_implicit_invocation: true

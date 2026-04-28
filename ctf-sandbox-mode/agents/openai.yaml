@@ -1,0 +1,4 @@
+interface:
+  display_name: "CTF Sandbox Mode"
+  short_description: "Competition-first workflow for CTF targets."
+  default_prompt: "Use $ctf-sandbox-mode to handle this CTF or sandbox challenge with runtime-first evidence and concise reproducible reporting."

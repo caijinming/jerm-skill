@@ -1,0 +1,14 @@
+=== baoyu-post-to-wechat: Permission & Environment Check ===
+
+✅ Chrome: /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+✅ Profile isolation: Skill profile: /Users/longhuadmin/Library/Application Support/baoyu-skills/chrome-profile
+✅ Profile dir: Exists and accessible
+✅ Bun runtime: v1.3.12
+✅ Accessibility (System Events): Frontmost app: iTerm2
+✅ Clipboard copy (image): Can copy image to clipboard via Swift/AppKit
+✅ Paste keystroke (osascript): System Events can send keystrokes
+⚠️  API credentials: Not found. Required for API publishing method. Run the skill to set up via guided flow.
+⚠️  Running Chrome instances: 49 Chrome process(es) detected. The skill uses --user-data-dir for isolation, so this is safe.
+
+--- Summary ---
+All checks passed. Ready to post to WeChat.

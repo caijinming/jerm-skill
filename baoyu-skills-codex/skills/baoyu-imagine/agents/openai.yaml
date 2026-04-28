@@ -1,0 +1,7 @@
+interface:
+  display_name: "Imagine"
+  short_description: "Generate images with provider-backed workflows"
+  default_prompt: "Use $baoyu-imagine to generate an image from a prompt or validate the local image-generation workflow."
+
+policy:
+  allow_implicit_invocation: true

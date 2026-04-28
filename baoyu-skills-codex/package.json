@@ -1,0 +1,29 @@
+{
+  "name": "baoyu-skills-codex",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "pptxgenjs": "^4.0.1",
+    "sharp": "^0.34.4"
+  },
+  "scripts": {
+    "doctor": "sh ./scripts/doctor.sh",
+    "test:url-to-markdown": "sh ./scripts/test-url-to-markdown.sh",
+    "test:translate-chunk": "sh ./scripts/test-translate-chunk.sh",
+    "test:imagine": "sh ./scripts/test-imagine.sh",
+    "test:cover-image": "sh ./scripts/test-cover-image.sh",
+    "test:infographic": "sh ./scripts/test-infographic.sh",
+    "test:image-cards": "sh ./scripts/test-image-cards.sh",
+    "test:slide-deck": "sh ./scripts/test-slide-deck.sh",
+    "test:comic": "sh ./scripts/test-comic.sh",
+    "test:article-illustrator": "sh ./scripts/test-article-illustrator.sh",
+    "test:diagram": "sh ./scripts/test-diagram.sh",
+    "test:markdown-to-html": "sh ./scripts/test-markdown-to-html.sh",
+    "test:format-markdown": "sh ./scripts/test-format-markdown.sh",
+    "test:youtube-transcript": "sh ./scripts/test-youtube-transcript.sh",
+    "test:post-to-wechat": "sh ./scripts/test-post-to-wechat.sh",
+    "test:post-to-x": "sh ./scripts/test-post-to-x.sh",
+    "test:x-to-markdown": "sh ./scripts/test-x-to-markdown.sh"
+  }
+}

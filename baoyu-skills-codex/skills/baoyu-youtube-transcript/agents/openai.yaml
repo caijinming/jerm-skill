@@ -1,0 +1,2 @@
+name: baoyu-youtube-transcript
+description: Fetch a YouTube video's transcript, metadata, and thumbnail into a local cache directory.

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Infographic"
+  short_description: "Turn content into a dense visual explainer"
+  default_prompt: "Use $baoyu-infographic to turn an article or markdown file into a structured infographic."
+
+policy:
+  allow_implicit_invocation: true
