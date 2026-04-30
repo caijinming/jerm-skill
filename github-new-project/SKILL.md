@@ -32,7 +32,10 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
 - 默认先走“无技术栈协作基线”模式，除非用户明确要求或仓库内已有清晰技术栈。
 - 默认使用 `OpenSpec` 风格目录，不默认接入更重的流程平台。
 - 默认把 GitHub 仓库建成私有仓库。
-- 如果用户要求 SSH 推送，必须检查 `ssh -T git@github.com`，并将 `origin` 设为 SSH URL。
+- 只要这个 skill 需要创建 GitHub 仓库，就默认将最终 `origin` 配置为 SSH URL，而不是保留 HTTPS。
+- 执行 `gh auth status`、`gh repo view`、`gh repo create`、`gh api user`、`ssh -T git@github.com` 等 GitHub 或网络相关命令时，优先使用提权执行，避免把沙箱限制误判成认证失败或远程不存在。
+- 不要把未提权环境中的 `gh auth status` 失败直接解释为 token 失效；若命令看起来受环境限制，必须先提权重试再下结论。
+- 创建 GitHub 仓库时，必须检查 `ssh -T git@github.com`，并将 `origin` 设为 SSH URL。
 - 所有 GitHub 操作优先使用 `gh`，例如 `gh repo create`、`gh pr create`、`gh issue create`。
 - 对已有项目执行时，只补缺失部分，不重写用户现有文档。
 
@@ -44,10 +47,10 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
 4. 若尚未初始化 git，则执行 `git init`，并将默认分支调整为 `main`。
 5. 建立首个 OpenSpec bootstrap change，记录初始化结构和任务。
 6. 生成 GitHub 协作基线：PR 模板、PR-Agent workflow、基础仓库校验 workflow。
-7. 若用户需要创建 GitHub 仓库，先检查 `gh auth status`；若用户要求 SSH 推送，再检查 `ssh -T git@github.com`，必要时执行 `gh config set git_protocol ssh`。
+7. 若用户需要创建 GitHub 仓库，先提权检查 `gh auth status`，再提权检查 `ssh -T git@github.com`，必要时执行 `gh config set git_protocol ssh`。
 8. 使用 `gh repo create <repo-name> --private --source=. --remote=origin` 创建私有仓库。
 9. 无论是否已执行 `gh config set git_protocol ssh`，都必须再次检查 `git remote -v`。
-10. 若远程被配置为 HTTPS 且用户要求 SSH，则将 `origin` 改为 `git@github.com:<owner>/<repo>.git`。
+10. 若远程被配置为 HTTPS，则将 `origin` 改为 `git@github.com:<owner>/<repo>.git`。
 11. 提交首个 bootstrap commit 并推送到 `origin/main`。
 12. 只有在用户明确指定技术栈，或仓库里已能推断真实语言时，再补充语言相关的 CI、测试、lint 和依赖。
 13. 最后向用户说明哪些部分已初始化，哪些 GitHub secrets 或占位配置仍需后续补齐。
@@ -70,11 +73,11 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
    - 执行 `git init`
    - 将默认分支设为 `main`
 8. 如果用户要求创建 GitHub 仓库：
-   - 先跑 `gh auth status`
-   - 如果用户要求 SSH，再跑 `ssh -T git@github.com`
+   - 提权跑 `gh auth status`
+   - 提权跑 `ssh -T git@github.com`
    - 需要时执行 `gh config set git_protocol ssh`
    - 先检查仓库是否已存在，再执行 `gh repo create`
-9. 如果用户要求 SSH：
+9. 如果这个 skill 创建了 GitHub 仓库：
    - 无论前面是否设置过 `gh config set git_protocol ssh`，都再次检查 `git remote -v`
    - 若 `origin` 不是 SSH URL，执行 `git remote set-url origin git@github.com:<owner>/<repo>.git`
 10. 在提交前，至少验证：
@@ -111,7 +114,7 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
 - OpenSpec 基线创建
 - PR-Agent 与 GitHub workflow 创建
 - `gh auth status` 检查
-- `ssh -T git@github.com` 检查（若用户要求 SSH）
+- `ssh -T git@github.com` 检查
 - 私有仓库创建
 - SSH remote 配置
 - 首个 commit 与 push
@@ -144,11 +147,11 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
 
 ## Command Preference
 
-- 先用 `git status`、`git remote -v`、`gh auth status` 探测环境。
-- 用户要求 SSH GitHub 操作时，再补 `ssh -T git@github.com`。
+- 先用 `git status`、`git remote -v` 探测本地环境。
+- 涉及 GitHub 或网络态检查时，优先提权执行 `gh auth status`、`gh api user`、`gh repo view`、`gh repo create`、`ssh -T git@github.com`。
 - 创建仓库优先用：
   `gh repo create <repo-name> --private --source=. --remote=origin`
-- 如果需要 SSH：
+- 创建仓库时默认需要 SSH：
   `gh config set git_protocol ssh`
 - 如果远程不是 SSH：
   `git remote set-url origin git@github.com:<owner>/<repo>.git`
@@ -208,7 +211,7 @@ description: 初始化适合 1 到 3 人团队的新项目仓库，默认面向 
 - 优先检查 `DESIGN.md` 是否足够克制，不把 UI 风格写死。
 - 优先检查 `openspec/project.md`、`openspec/CURRENT.md` 和 bootstrap change 是否完整。
 - 优先检查 `.github/workflows/pr-agent.yml` 与 `.pr_agent.toml` 是否成对出现。
-- 优先检查最终 `origin` 是否真的是 SSH URL（如果用户要求 SSH）。
+- 优先检查最终 `origin` 是否真的是 SSH URL（只要本次创建了 GitHub 仓库就必须满足）。
 - 优先检查是否错误地引入了某个语言栈依赖。
 
 ## Maintain This Skill
