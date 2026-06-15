@@ -1,4 +1,4 @@
 interface:
   display_name: "HarmonyOS ArkTS Guide"
-  short_description: "ArkTS coding, review, and migration guidance"
-  default_prompt: "Use $harmonyos-arkts-guide to write or review HarmonyOS ArkTS code using official style and migration guidance."
+  short_description: "ArkTS coding, review, migration, and V1-to-V2 upgrade guidance"
+  default_prompt: "Use $harmonyos-arkts-guide to write, review, migrate, or upgrade HarmonyOS ArkTS code, including ArkUI state management V1-to-V2 changes."
